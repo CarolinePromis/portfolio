@@ -23,3 +23,7 @@ body {
   transition: background 0s;
   z-index: 100;
 }
+
+a:hover {
+  color: aquamarine;
+}

@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, NavLink } from "react-router";
-import { Accueil } from './Accueil';
+import { Accueil } from './Projets';
 import { Contact } from './Contact';
 
 const pages = [
@@ -18,7 +18,7 @@ export default function App() {
 
             {/* Logo et nom du site */}
             <a href="/portfolio/">
-              <img src={"logo.png"} alt="Logo du site, 'PC' en blanc et gras sur fond bleu foncé" width="50" />
+              <img src="logo.png" alt="Logo du site, 'PC' en blanc et gras sur fond bleu foncé" width="50" />
             </a>
 
             <div className="flex items-center m-5 space-x-10">
@@ -26,8 +26,8 @@ export default function App() {
                 <NavLink key={item.name} to={item.href} end
                   className={({ isActive }) =>
                     isActive
-                      ? "text-cyan-200 font-semibold"
-                      : "hover:text-cyan-200"
+                      ? "text-emerald-200 font-semibold"
+                      : ""
                   }
                 >
                   {item.name}
@@ -52,8 +52,9 @@ export default function App() {
         </main>
       </BrowserRouter>
 
-      <footer className="m-5">
+      <footer className="m-10 flex justify-between">
         <p>Réalisé par Caroline Promis© 2025. Tous droits réservés.</p>
+        <a href="https://carolinepromis.github.io/Portfolio-vanilla/" target="_blank">Ancien portfolio</a>
       </footer>
     </>
   );

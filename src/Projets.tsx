@@ -1,25 +1,24 @@
 import { useState } from "react";
+import projets from "./projets.json";
 
 export function Accueil() {
   const [filtre, setFiltre] = useState("tout");
 
-  const projets = [
-    { id: 1, categorie: "web", nom: "Site web créatif", img_ill: "SitePoissons.png" },
-    { id: 2, categorie: "logi", nom: "Guerre de pixels", img_ill: "" },
-    { id: 3, categorie: "tuto", nom: "Tutoriel React" },
-    { id: 4, categorie: "web", nom: "E-commerce" },
-  ];
-
-  const projetsFiltres = filtre === "tout" ? projets : projets.filter(p => p.categorie === filtre);
+  const projetsFiltres = [...projets]
+    // tri par année (descendant) puis par titre (ascendant)
+    .sort((a, b) =>
+      b.annee - a.annee || a.titre.localeCompare(b.titre)
+    )
+    .filter(p => filtre === "tout" || p.categorie === filtre);
 
   const boutonClasse = (valeur: string) =>
-    `cursor-pointer transition-colors hover:text-emerald-200 ${filtre === valeur 
+    `hover:text-emerald-200 ${filtre === valeur
       ? "text-emerald-200 font-semibold" : ""
     }`;
 
   return (
     <>
-      <div className="flex justify-evenly mx-5">
+      <div className="flex justify-evenly mx-5 my-8">
         <button className={boutonClasse("tout")} onClick={() => setFiltre("tout")}>
           Tout
         </button>
@@ -34,11 +33,11 @@ export function Accueil() {
         </button>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="columns-2 md:columns-3 xl:columns-5">
         {projetsFiltres.map(p => (
-          <div key={p.id} className="m-3 proj show flex flex-col items-center">
-            {p.img_ill && <img src={p.img_ill} alt={p.nom} className="w-70 rounded-xl" />}
-            <span>{p.nom}</span>
+          <div key={p.id} className="mx-2 md:mx-5 my-5 break-inside-avoid text-center hover:opacity-75">
+            <img src={p.img_cov} alt={p.titre} className="w-full rounded-xl border border-slate-500" />
+            <span>{p.titre}</span>
           </div>
         ))}
       </div>

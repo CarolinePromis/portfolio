@@ -31,5 +31,5 @@ export default function Cursor() {
     };
   }, []);
 
-  return <div className="cursor" ref={cursorRef}></div>;
+  return <div className="cursor [@media(hover:none)]:hidden" ref={cursorRef}></div>;
 }
